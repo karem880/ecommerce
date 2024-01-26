@@ -120,9 +120,10 @@ const MySplideComponent = () => {
                       - {product.discount}%
                     </span>
                   )}
-                  <button className="bg-slate-800 shadow-lg shadow-slate-500 text-white px-4 py-2 rounded-md h-[50px] w-full mt-2">
-                    Add to Cart
-                  </button>
+                  <NavLink to={"/login"} >
+                    <button className="bg-slate-800 shadow-lg shadow-slate-500 text-white px-4 py-2 rounded-md h-[50px] w-full mt-2">Add to Cart</button>
+                    
+                  </NavLink>
                 </div>
               </div>
             </li>)
@@ -131,7 +132,7 @@ const MySplideComponent = () => {
         </ul>
       </div>
     </div>
-    <div className="flex items-center justify-center w-full mt-16 "><Link to={"/"} className="bg-yellow-500 text-white p-2 w-[150px] flex items-center justify-center rounded-md" >All PRODUCTS</Link></div>
+    <div className="flex items-center justify-center w-full mt-16 "><Link to={"/login"} className="bg-yellow-500 text-white p-2 w-[150px] flex items-center justify-center rounded-md" >All PRODUCTS</Link></div>
     </>
   );
 };

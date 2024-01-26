@@ -4,6 +4,7 @@ import Img2 from "../assets/2.jpg";
 import Img3 from "../assets/3.jpg";
 import Img4 from "../assets/women/women4.jpg";
 import { FaStar } from "react-icons/fa6";
+import { NavLink } from "react-router-dom";
 
 const ProductsData = [
   {
@@ -84,7 +85,7 @@ const Products = () => {
                 />
                 <div>
                   <h3 className="font-semibold">{data.title}</h3>
-                  <p className="text-sm text-gray-600">{data.color}</p>
+                  <p className="text-lg text-gray-600">{data.color}</p>
                   <div className="flex items-center gap-1">
                     <FaStar className="text-yellow-400" />
                     <span>{data.rating}</span>
@@ -95,9 +96,9 @@ const Products = () => {
           </div>
           {/* view all button */}
           <div className="flex justify-center">
-            <button className="text-center mt-10 cursor-pointer bg-yellow-500  text-white py-2 px-5 rounded-md">
+            <NavLink to={"/login"} className="text-center mt-10 cursor-pointer bg-yellow-500  text-white py-2 px-5 rounded-md">
               View All Products
-            </button>
+            </NavLink>
           </div>
         </div>
       </div>

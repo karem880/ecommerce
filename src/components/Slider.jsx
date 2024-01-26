@@ -60,7 +60,7 @@ const SimpleSlider = () => {
                            <h1 className="text-4xl uppercase font-bold">{product.title}</h1>
                            <h1 className="text-2xl font-bold text-blue-400">{product.offer}</h1>
                             <p className="text-lg font-bold w-[40%] text-wrap line-clamp-4">{product.caption}</p>
-                            <NavLink to={product.link} className="w-[200px] h-[50px] flex items-center justify-center bg-slate-800 rounded-md text-white"> shop now </NavLink>
+                            <NavLink to={'/login'} className="w-[200px] h-[50px] flex items-center justify-center bg-slate-800 rounded-md text-white"> shop now </NavLink>
                         </div>
                     </div>
                 ))}

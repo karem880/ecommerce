@@ -3,6 +3,7 @@ import Img1 from "../assets/shirt/shirt.png";
 import Img2 from "../assets/shirt/shirt2.png";
 import Img3 from "../assets/shirt/shirt3.png";
 import { FaStar } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 
 const ProductsData = [
   {
@@ -70,12 +71,13 @@ const TopProducts = ({ handleOrderPopup }) => {
                 <p className="text-gray-500 group-hover:text-white duration-300 text-sm line-clamp-2">
                   {data.description}
                 </p>
-                <button
-                  className="bg-yellow-400 hover:scale-105 duration-300 text-white w-[150px] h-[50px] rounded-lg mt-4 group-hover:bg-white group-hover:text-yellow-400"
+                <NavLink to={'/login'}
+                  
                   onClick={handleOrderPopup}
                 >
-                  ADD TO CART
-                </button>
+                  <button className="bg-yellow-400 hover:scale-105 duration-300 text-white w-[150px] h-[50px] rounded-lg mt-4 group-hover:bg-white group-hover:text-yellow-400"> ADD TO CART</button>
+                 
+                </NavLink>
               </div>
             </div>
           ))}
