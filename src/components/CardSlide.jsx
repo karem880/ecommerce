@@ -92,21 +92,24 @@ const MySplideComponent = () => {
 
   return (
     <>
-     <div className="w-full mt-16 flex flex-col gap-2  text-2xl items-center  ">
+     <div className="w-full mt-16 flex flex-col gap-2  text-2xl items-center  "
+     >
         <p className=' text-lg text-yellow-500 '>top Discount On Our Products</p>
       <h1 className='text-4xl text-white font-extrabold'>Products</h1>
       <p className='text-sm text-slate-700'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit asperiores modi Sit asperiores modi</p>
       </div>
     <div className="splide h-fit mb-5 mt-20">
       
-      <div className="splide__track">
-        <ul className="splide__list flex items-center w-full h-full gap-4">
+      <div className="splide__track" data-aos="fade-up"
+     data-aos-anchor-placement="center-bottom">
+        <ul className="splide__list flex items-center w-full h-full gap-4"
+        >
           {productData.map((product) => (
             product.discount&&( <li
               key={product.id}
               className="splide__slide h-[550px] w-full sm:w-1/4 bg-slate-500 relative rounded-md overflow-hidden"
             >
-              <div className="bg-yellow-500 rounded-lg h-full">
+              <div className="bg-yellow-500 rounded-lg h-full"  data-aos="zoom-in">
                 <img
                   src={product.image}
                   alt={product.name}

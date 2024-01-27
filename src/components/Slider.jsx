@@ -47,7 +47,9 @@ const SimpleSlider = () => {
     };
 
     return (
-        <div className="h-[500px] md:h-[800px] w-full object-cover overflow-hidden bg-black">
+        <div className="h-[500px] md:h-[800px] w-full object-cover overflow-hidden bg-black"  data-aos="flip-left"
+        data-aos-easing="ease-out-cubic"
+        data-aos-duration="2000">
             <Slider {...settings} className=" overflow-hidden">
                 {productData.map((product) => (
                     <div key={product.id} className="relative">

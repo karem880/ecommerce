@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import {FaShoppingCart ,FaUser , FaHeart, FaSearch ,FaBars} from 'react-icons/fa'
 import logo from "../assets/women/women2.jpg";
+import axios from 'axios';
 
 
 function NavBar() {
@@ -15,8 +16,10 @@ function NavBar() {
     setisimageactive(!isimageactive);
   };
 
+
+
   return (
-    <div className='w-full'>
+    <div className='w-full  '>
       <nav className="bg-gray-800">
         <div className="mx-auto w-[90%] px-2 sm:px-6 lg:px-8">
           <div className="relative flex h-16 items-center justify-between">
@@ -42,14 +45,14 @@ function NavBar() {
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex flex-shrink-0 items-center">
                 {/* <img className="h-8  w-8 rounded-full" src={logo} alt="Your Company"  /> */}
-                <NavLink to={"/"} className='text-yellow-500 text-2xl font-extrabold'>Stoty </NavLink>
+                <Link to={"/"} className='text-yellow-500 text-2xl font-extrabold'>Stoty </Link>
               </div>
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
                   <NavLink to={'/'} className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</NavLink>
-                  <NavLink to={'/login'} className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">category</NavLink>
-                  <NavLink to={'/login'} className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Products</NavLink>
-                  <NavLink to={'/login'} className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">review</NavLink>
+                  <NavLink to={'/Categories'} className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">category</NavLink>
+                  <NavLink to={'/products'} className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Products</NavLink>
+                  <a href='#contact' className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">review</a>
                 
                 </div>
               </div>
