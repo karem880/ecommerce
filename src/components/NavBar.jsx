@@ -5,10 +5,12 @@ import logo from "../assets/women/women2.jpg";
 import axios from 'axios';
 
 
-function NavBar() {
+function NavBar({CartLength}) {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isimageactive, setisimageactive] = useState(false);
 
+
+  
   const handleMobileMenuToggle = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
   };
@@ -50,8 +52,8 @@ function NavBar() {
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
                   <NavLink to={'/'} className="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Home</NavLink>
-                  <NavLink to={'/Categories'} className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">category</NavLink>
-                  <NavLink to={'/products'} className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Products</NavLink>
+                  <NavLink to={'/shop'} className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">category</NavLink>
+                  <NavLink to={'/shop'} className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Products</NavLink>
                   <a href='#contact' className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">review</a>
                 
                 </div>
@@ -64,7 +66,11 @@ function NavBar() {
               <FaSearch size={20} color='white'/>
 
                 </div>
-              <FaShoppingCart size={24} className='text-gray-200'/>
+               
+               <NavLink to={"/cart"}><div className='relative'>
+              <FaShoppingCart size={24} className='text-gray-200 '/>
+              <span className='absolute top-[-2px] right-[-2px] bg-red-500 text-white flex w-2 rounded-full h-2 p-2 items-center justify-center'>{CartLength}</span>
+              </div></NavLink> 
               <FaHeart size={24} className='text-gray-200'/>
               {/* Profile dropdown */}
               <div  onClick={handleimgaeMenuToggle} className="relative ml-3">

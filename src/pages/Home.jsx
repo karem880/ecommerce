@@ -7,10 +7,12 @@ import Banner from '../components/Banar'
 import Subscribe from '../components/Subscribe'
 import Testimonials from '../components/Testimonials'
 import Footer from '../components/Footer'
+import NavBar from '../components/NavBar'
 
 function Home() {
   return (
     <>
+
       <SimpleSlider/>
       <Products/>
      
