@@ -25,7 +25,7 @@ const MySplideComponent = () => {
 
   useEffect(() => {
     const updatePerPage = () => {
-      setPerPage(window.innerWidth < 850 ? 1 : 5);
+      setPerPage(window.innerWidth < 1050 ? 1 : 5);
     };
 
     // Initial update
