@@ -96,7 +96,7 @@ const Products = () => {
           </div>
           {/* view all button */}
           <div className="flex justify-center">
-            <NavLink to={"/login"} className="text-center mt-10 cursor-pointer bg-yellow-500  text-white py-2 px-5 rounded-md">
+            <NavLink to={"/shop"} className="text-center mt-10 cursor-pointer bg-yellow-500  text-white py-2 px-5 rounded-md">
               View All Products
             </NavLink>
           </div>

@@ -1,108 +1,335 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function Dashboard() {
+  useEffect(() => {
+    // Toggle dropdown list
+    const toggleDD = (myDropMenu) => {
+      const dropdown = document.getElementById(myDropMenu);
+      if (dropdown) {
+        dropdown.classList.toggle('invisible');
+      }
+    };
+
+    // Filter dropdown options
+    const filterDD = (myDropMenu, myDropMenuSearch) => {
+      const input = document.getElementById(myDropMenuSearch);
+      const filter = input.value.toUpperCase();
+      const dropdown = document.getElementById(myDropMenu);
+
+      if (dropdown) {
+        const options = dropdown.getElementsByTagName('a');
+        for (let i = 0; i < options.length; i++) {
+          if (options[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+            options[i].style.display = '';
+          } else {
+            options[i].style.display = 'none';
+          }
+        }
+      }
+    };
+
+    // Close the dropdown menu if the user clicks outside of it
+    const handleOutsideClick = (event) => {
+      const dropdowns = document.getElementsByClassName('dropdownlist');
+      for (let i = 0; i < dropdowns.length; i++) {
+        const openDropdown = dropdowns[i];
+        if (!openDropdown.classList.contains('invisible') && !openDropdown.contains(event.target)) {
+          openDropdown.classList.add('invisible');
+        }
+      }
+    };
+
+    window.addEventListener('click', handleOutsideClick);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
   return (
- <div>
-  <div className="flex w-screen h-screen text-gray-400 bg-gray-900">
-    {/* Component Start */}
-    <div className="flex flex-col items-center w-16 pb-4 overflow-auto border-r border-gray-800 text-gray-500">
-      <a className="flex items-center justify-center flex-shrink-0 w-full h-16" href="#">
-        <svg className="w-8 h-8 stroke-current text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-        </svg>
-      </a>
-      <a className="flex items-center justify-center flex-shrink-0 w-10 h-10 mt-4 rounded hover:bg-gray-800" href="#">
-        <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-        </svg>
-      </a>
-      <a className="flex items-center justify-center flex-shrink-0 w-10 h-10 mt-4 rounded hover:bg-gray-800" href="#">
-        <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-      </a>
-      <a className="flex items-center justify-center flex-shrink-0 w-10 h-10 mt-4 rounded hover:bg-gray-800" href="#">
-        <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-        </svg>
-      </a>
-      <a className="flex items-center justify-center flex-shrink-0 w-10 h-10 mt-4 rounded hover:bg-gray-800" href="#">
-        <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-        </svg>
-      </a>
-      <a className="flex items-center justify-center flex-shrink-0 w-10 h-10 mt-4 rounded hover:bg-gray-800" href="#">
-        <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-        </svg>
-      </a>
-      <a className="flex items-center justify-center flex-shrink-0 w-10 h-10 mt-4 mt-auto rounded hover:bg-gray-800" href="#">
-        <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      </a>
-    </div>
-    
-    <div className="flex flex-col flex-grow">
-      <div className="flex items-center flex-shrink-0 h-16 px-8 border-b border-gray-800">
-        <h1 className="text-lg font-medium">Page Title</h1>
-        <button className="flex items-center justify-center h-10 px-4 ml-auto text-sm font-medium rounded hover:bg-gray-800">
-          Action 1
-        </button>
-        <button className="flex items-center justify-center h-10 px-4 ml-2 text-sm font-medium bg-gray-800 rounded hover:bg-gray-700">
-          Action 2
-        </button>
-        <button className="relative ml-2 text-sm focus:outline-none group">
-          <div className="flex items-center justify-between w-10 h-10 rounded hover:bg-gray-800">
-            <svg className="w-5 h-5 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-            </svg>
-          </div>
-          <div className="absolute right-0 flex-col items-start hidden w-40 mt-1 pb-1 bg-gray-800 border border-gray-800 shadow-lg group-focus:flex">
-            <a className="w-full px-4 py-2 text-left hover:bg-gray-900" href="#">Menu Item 1</a>
-            <a className="w-full px-4 py-2 text-left hover:bg-gray-900" href="#">Menu Item 2</a>
-            <a className="w-full px-4 py-2 text-left hover:bg-gray-900" href="#">Menu Item 3</a>
-          </div>
-        </button>
-      </div>
-      <div className="flex-grow p-6 overflow-auto bg-gray-800">
-        <div className="grid grid-cols-3 gap-6">
-          <div className="h-24 col-span-1 bg-gray-700" />
-          <div className="h-24 col-span-1 bg-gray-700" />
-          <div className="h-24 col-span-1 bg-gray-700" />
-          <div className="h-24 col-span-2 bg-gray-700" />
-          <div className="h-24 col-span-1 bg-gray-700" />
-          <div className="h-24 col-span-1 bg-gray-700" />
-          <div className="h-24 col-span-2 bg-gray-700" />
-          <div className="h-24 col-span-3 bg-gray-700" />
-          <div className="h-24 col-span-1 bg-gray-700" />
-          <div className="h-24 col-span-1 bg-gray-700" />
-          <div className="h-24 col-span-1 bg-gray-700" />
-          <div className="h-24 col-span-2 bg-gray-700" />
-          <div className="h-24 col-span-1 bg-gray-700" />
-          <div className="h-24 col-span-1 bg-gray-700" />
-          <div className="h-24 col-span-2 bg-gray-700" />
-          <div className="h-24 col-span-3 bg-gray-700" />
-          <div className="h-24 col-span-1 bg-gray-700" />
-          <div className="h-24 col-span-1 bg-gray-700" />
-          <div className="h-24 col-span-1 bg-gray-700" />
-          <div className="h-24 col-span-2 bg-gray-700" />
-          <div className="h-24 col-span-1 bg-gray-700" />
-          <div className="h-24 col-span-1 bg-gray-700" />
-          <div className="h-24 col-span-2 bg-gray-700" />
-          <div className="h-24 col-span-3 bg-gray-700" />
+<div>
+  <header>
+    {/*Nav*/}
+    <nav aria-label="menu nav" className="bg-gray-800 pt-2 md:pt-1 pb-1 px-1 mt-0 h-auto fixed w-full z-20 top-0">
+      <div className="flex flex-wrap items-center">
+        <div className="flex flex-shrink md:w-1/3 justify-center md:justify-start text-white">
+          <a href="#" aria-label="Home">
+            <span className="text-xl pl-2"><i className="em em-grinning" /></span>
+          </a>
+        </div>
+        <div className="flex flex-1 md:w-1/3 justify-center md:justify-start text-white px-2">
+          <span className="relative w-full">
+            <input aria-label="search" type="search" id="search" placeholder="Search" className="w-full bg-gray-900 text-white transition border border-transparent focus:outline-none focus:border-gray-400 rounded py-3 px-2 pl-10 appearance-none leading-normal" />
+            <div className="absolute search-icon" style={{top: '1rem', left: '.8rem'}}>
+              <svg className="fill-current pointer-events-none text-white w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
+              </svg>
+            </div>
+          </span>
+        </div>
+        <div className="flex w-full pt-2 content-center justify-between md:w-1/3 md:justify-end">
+          <ul className="list-reset flex justify-between flex-1 md:flex-none items-center">
+            <li className="flex-1 md:flex-none md:mr-3">
+              <a className="inline-block py-2 px-4 text-white no-underline" href="#">Active</a>
+            </li>
+            <li className="flex-1 md:flex-none md:mr-3">
+              <a className="inline-block text-gray-400 no-underline hover:text-gray-200 hover:text-underline py-2 px-4" href="#">link</a>
+            </li>
+            <li className="flex-1 md:flex-none md:mr-3">
+              <div className="relative inline-block">
+                <button onclick="toggleDD('myDropdown')" className="drop-button text-white py-2 px-2"> <span className="pr-2"><i className="em em-robot_face" /></span> Hi, User <svg className="h-3 fill-current inline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg></button>
+                <div id="myDropdown" className="dropdownlist absolute bg-gray-800 text-white right-0 mt-3 p-3 overflow-auto z-30 invisible">
+                  <input type="text" className="drop-search p-2 text-gray-600" placeholder="Search.." id="myInput" onkeyup="filterDD('myDropdown','myInput')" />
+                  <a href="#" className="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i className="fa fa-user fa-fw" /> Profile</a>
+                  <a href="#" className="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i className="fa fa-cog fa-fw" /> Settings</a>
+                  <div className="border border-gray-800" />
+                  <a href="#" className="p-2 hover:bg-gray-800 text-white text-sm no-underline hover:no-underline block"><i className="fas fa-sign-out-alt fa-fw" /> Log Out</a>
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
+    </nav>
+  </header>
+  <main>
+    <div className="flex flex-col md:flex-row">
+      <nav aria-label="alternative nav">
+        <div className="bg-gray-800 shadow-xl h-20 fixed bottom-0 mt-12 md:relative md:h-screen z-10 w-full md:w-48 content-center">
+          <div className="md:mt-12 md:w-48 md:fixed md:left-0 md:top-0 content-center md:content-start text-left justify-between">
+            <ul className="list-reset flex flex-row md:flex-col pt-3 md:py-3 px-1 md:px-2 text-center md:text-left">
+              <li className="mr-3 flex-1">
+                <a href="#" className="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-pink-500">
+                  <i className="fas fa-tasks pr-0 md:pr-3" /><span className="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Tasks</span>
+                </a>
+              </li>
+              <li className="mr-3 flex-1">
+                <a href="#" className="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-purple-500">
+                  <i className="fa fa-envelope pr-0 md:pr-3" /><span className="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Messages</span>
+                </a>
+              </li>
+              <li className="mr-3 flex-1">
+                <a href="#" className="block py-1 md:py-3 pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-blue-600">
+                  <i className="fas fa-chart-area pr-0 md:pr-3 text-blue-600" /><span className="pb-1 md:pb-0 text-xs md:text-base text-white md:text-white block md:inline-block">Analytics</span>
+                </a>
+              </li>
+              <li className="mr-3 flex-1">
+                <a href="#" className="block py-1 md:py-3 pl-0 md:pl-1 align-middle text-white no-underline hover:text-white border-b-2 border-gray-800 hover:border-red-500">
+                  <i className="fa fa-wallet pr-0 md:pr-3" /><span className="pb-1 md:pb-0 text-xs md:text-base text-gray-400 md:text-gray-200 block md:inline-block">Payments</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <section>
+        <div id="main" className="main-content flex-1 bg-gray-100 mt-12 md:mt-2 pb-24 md:pb-5">
+          <div className="bg-gray-800 pt-3">
+            <div className="rounded-tl-3xl bg-gradient-to-r from-blue-900 to-gray-800 p-4 shadow text-2xl text-white">
+              <h1 className="font-bold pl-2">Analytics</h1>
+            </div>
+          </div>
+          <div className="flex flex-wrap">
+            <div className="w-full md:w-1/2 xl:w-1/3 p-6">
+              {/*Metric Card*/}
+              <div className="bg-gradient-to-b from-green-200 to-green-100 border-b-4 border-green-600 rounded-lg shadow-xl p-5">
+                <div className="flex flex-row items-center">
+                  <div className="flex-shrink pr-4">
+                    <div className="rounded-full p-5 bg-green-600"><i className="fa fa-wallet fa-2x fa-inverse" /></div>
+                  </div>
+                  <div className="flex-1 text-right md:text-center">
+                    <h2 className="font-bold uppercase text-gray-600">Total Revenue</h2>
+                    <p className="font-bold text-3xl">$3249 <span className="text-green-500"><i className="fas fa-caret-up" /></span></p>
+                  </div>
+                </div>
+              </div>
+              {/*/Metric Card*/}
+            </div>
+            <div className="w-full md:w-1/2 xl:w-1/3 p-6">
+              {/*Metric Card*/}
+              <div className="bg-gradient-to-b from-pink-200 to-pink-100 border-b-4 border-pink-500 rounded-lg shadow-xl p-5">
+                <div className="flex flex-row items-center">
+                  <div className="flex-shrink pr-4">
+                    <div className="rounded-full p-5 bg-pink-600"><i className="fas fa-users fa-2x fa-inverse" /></div>
+                  </div>
+                  <div className="flex-1 text-right md:text-center">
+                    <h2 className="font-bold uppercase text-gray-600">Total Users</h2>
+                    <p className="font-bold text-3xl">249 <span className="text-pink-500"><i className="fas fa-exchange-alt" /></span></p>
+                  </div>
+                </div>
+              </div>
+              {/*/Metric Card*/}
+            </div>
+            <div className="w-full md:w-1/2 xl:w-1/3 p-6">
+              {/*Metric Card*/}
+              <div className="bg-gradient-to-b from-yellow-200 to-yellow-100 border-b-4 border-yellow-600 rounded-lg shadow-xl p-5">
+                <div className="flex flex-row items-center">
+                  <div className="flex-shrink pr-4">
+                    <div className="rounded-full p-5 bg-yellow-600"><i className="fas fa-user-plus fa-2x fa-inverse" /></div>
+                  </div>
+                  <div className="flex-1 text-right md:text-center">
+                    <h2 className="font-bold uppercase text-gray-600">New Users</h2>
+                    <p className="font-bold text-3xl">2 <span className="text-yellow-600"><i className="fas fa-caret-up" /></span></p>
+                  </div>
+                </div>
+              </div>
+              {/*/Metric Card*/}
+            </div>
+            <div className="w-full md:w-1/2 xl:w-1/3 p-6">
+              {/*Metric Card*/}
+              <div className="bg-gradient-to-b from-blue-200 to-blue-100 border-b-4 border-blue-500 rounded-lg shadow-xl p-5">
+                <div className="flex flex-row items-center">
+                  <div className="flex-shrink pr-4">
+                    <div className="rounded-full p-5 bg-blue-600"><i className="fas fa-server fa-2x fa-inverse" /></div>
+                  </div>
+                  <div className="flex-1 text-right md:text-center">
+                    <h2 className="font-bold uppercase text-gray-600">Server Uptime</h2>
+                    <p className="font-bold text-3xl">152 days</p>
+                  </div>
+                </div>
+              </div>
+              {/*/Metric Card*/}
+            </div>
+            <div className="w-full md:w-1/2 xl:w-1/3 p-6">
+              {/*Metric Card*/}
+              <div className="bg-gradient-to-b from-indigo-200 to-indigo-100 border-b-4 border-indigo-500 rounded-lg shadow-xl p-5">
+                <div className="flex flex-row items-center">
+                  <div className="flex-shrink pr-4">
+                    <div className="rounded-full p-5 bg-indigo-600"><i className="fas fa-tasks fa-2x fa-inverse" /></div>
+                  </div>
+                  <div className="flex-1 text-right md:text-center">
+                    <h2 className="font-bold uppercase text-gray-600">To Do List</h2>
+                    <p className="font-bold text-3xl">7 tasks</p>
+                  </div>
+                </div>
+              </div>
+              {/*/Metric Card*/}
+            </div>
+            <div className="w-full md:w-1/2 xl:w-1/3 p-6">
+              {/*Metric Card*/}
+              <div className="bg-gradient-to-b from-red-200 to-red-100 border-b-4 border-red-500 rounded-lg shadow-xl p-5">
+                <div className="flex flex-row items-center">
+                  <div className="flex-shrink pr-4">
+                    <div className="rounded-full p-5 bg-red-600"><i className="fas fa-inbox fa-2x fa-inverse" /></div>
+                  </div>
+                  <div className="flex-1 text-right md:text-center">
+                    <h2 className="font-bold uppercase text-gray-600">Issues</h2>
+                    <p className="font-bold text-3xl">3 <span className="text-red-500"><i className="fas fa-caret-up" /></span></p>
+                  </div>
+                </div>
+              </div>
+              {/*/Metric Card*/}
+            </div>
+          </div>
+          <div className="flex flex-row flex-wrap flex-grow mt-2">
+            <div className="w-full md:w-1/2 xl:w-1/3 p-6">
+              {/*Graph Card*/}
+              <div className="bg-white border-transparent rounded-lg shadow-xl">
+                <div className="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
+                  <h className="font-bold uppercase text-gray-600">Graph</h>
+                </div>
+                <div className="p-5">
+                  <canvas id="chartjs-7" className="chartjs" width="undefined" height="undefined" />
+                </div>
+              </div>
+              {/*/Graph Card*/}
+            </div>
+            <div className="w-full md:w-1/2 xl:w-1/3 p-6">
+              {/*Graph Card*/}
+              <div className="bg-white border-transparent rounded-lg shadow-xl">
+                <div className="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
+                  <h2 className="font-bold uppercase text-gray-600">Graph</h2>
+                </div>
+                <div className="p-5">
+                  <canvas id="chartjs-0" className="chartjs" width="undefined" height="undefined" />
+                </div>
+              </div>
+              {/*/Graph Card*/}
+            </div>
+            <div className="w-full md:w-1/2 xl:w-1/3 p-6">
+              {/*Graph Card*/}
+              <div className="bg-white border-transparent rounded-lg shadow-xl">
+                <div className="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
+                  <h2 className="font-bold uppercase text-gray-600">Graph</h2>
+                </div>
+                <div className="p-5">
+                  <canvas id="chartjs-1" className="chartjs" width="undefined" height="undefined" />
+                </div>
+              </div>
+              {/*/Graph Card*/}
+            </div>
+            <div className="w-full md:w-1/2 xl:w-1/3 p-6">
+              {/*Graph Card*/}
+              <div className="bg-white border-transparent rounded-lg shadow-xl">
+                <div className="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
+                  <h5 className="font-bold uppercase text-gray-600">Graph</h5>
+                </div>
+                <div className="p-5"><canvas id="chartjs-4" className="chartjs" width="undefined" height="undefined" />
+                </div>
+              </div>
+              {/*/Graph Card*/}
+            </div>
+            <div className="w-full md:w-1/2 xl:w-1/3 p-6">
+              {/*Table Card*/}
+              <div className="bg-white border-transparent rounded-lg shadow-xl">
+                <div className="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
+                  <h2 className="font-bold uppercase text-gray-600">Graph</h2>
+                </div>
+                <div className="p-5">
+                  <table className="w-full p-5 text-gray-700">
+                    <thead>
+                      <tr>
+                        <th className="text-left text-blue-900">Name</th>
+                        <th className="text-left text-blue-900">Side</th>
+                        <th className="text-left text-blue-900">Role</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Obi Wan Kenobi</td>
+                        <td>Light</td>
+                        <td>Jedi</td>
+                      </tr>
+                      <tr>
+                        <td>Greedo</td>
+                        <td>South</td>
+                        <td>Scumbag</td>
+                      </tr>
+                      <tr>
+                        <td>Darth Vader</td>
+                        <td>Dark</td>
+                        <td>Sith</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <p className="py-2"><a href="#">See More issues...</a></p>
+                </div>
+              </div>
+              {/*/table Card*/}
+            </div>
+            <div className="w-full md:w-1/2 xl:w-1/3 p-6">
+              {/*Advert Card*/}
+              <div className="bg-white border-transparent rounded-lg shadow-xl">
+                <div className="bg-gradient-to-b from-gray-300 to-gray-100 uppercase text-gray-800 border-b-2 border-gray-300 rounded-tl-lg rounded-tr-lg p-2">
+                  <h2 className="font-bold uppercase text-gray-600">Advert</h2>
+                </div>
+                <div className="p-5 text-center">
+                </div>
+              </div>
+              {/*/Advert Card*/}
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-    {/* Component End  */}
-  </div>
-  <a className="fixed flex items-center justify-center h-8 pr-2 pl-1 bg-blue-600 rounded-full bottom-0 right-0 mr-4 mb-4 shadow-lg text-blue-100 hover:bg-blue-600" href="https://twitter.com/lofiui" target="_top">
-    <div className="flex items-center justify-center h-6 w-6 bg-blue-500 rounded-full">
-      <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><g><path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z" /></g></svg>
-    </div>
-    <span className="text-sm ml-1 leading-none">@lofiui</span>
-  </a>
+  </main>
 </div>
+
+
+
+
+
 
   )
 }

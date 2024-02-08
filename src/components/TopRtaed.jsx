@@ -71,11 +71,11 @@ const TopProducts = ({ handleOrderPopup }) => {
                 <p className="text-gray-500 group-hover:text-white duration-300 text-sm line-clamp-2">
                   {data.description}
                 </p>
-                <NavLink to={'/login'}
+                <NavLink to={'/shop'}
                   
                   onClick={handleOrderPopup}
                 >
-                  <button className="bg-yellow-400 hover:scale-105 duration-300 text-white w-[150px] h-[50px] rounded-lg mt-4 group-hover:bg-white group-hover:text-yellow-400"> ADD TO CART</button>
+                  <button className="bg-yellow-400 hover:scale-105 duration-300 text-white w-[150px] h-[50px] rounded-lg mt-4 group-hover:bg-white group-hover:text-yellow-400"> Shopping Now</button>
                  
                 </NavLink>
               </div>

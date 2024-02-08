@@ -11,6 +11,9 @@ import Dashboard from "./pages/Dashboard";
 import Shop from "./pages/Shop";
 import Cart from "./pages/Cart";
 import CheckOut from "./pages/CheckOut";
+import Details from "./pages/Details";
+import Fav from "./pages/Fav";
+import { ContextProvider } from "./components/auth";
 
 function App() {
   useEffect(() => {
@@ -26,35 +29,19 @@ function App() {
   const [cartLength, setCartLength] = useState(0);
   
   useEffect(() => {
-    // Retrieve cart data from localStorage
     const storedCart = localStorage.getItem("cart");
   
     if (storedCart) {
-      // Parse the stored cart data
       const parsedCart = JSON.parse(storedCart);
   
-      // Update the cart state
       setCart(parsedCart);
   
-      // Update the cart length state
       setCartLength(parsedCart.length);
     }
   }, []);
 
 
-  const handleDeleteItem = (itemId) => {
-    // Filter out the item with the specified ID
-    const updatedCart = cart.filter((item) => item.id !== itemId);
 
-    // Update the cart state
-    setCart(updatedCart);
-
-    // Update the localStorage with the updated cart
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-    toast.success("deleted succssefully")
-    
-  };
-  
   const addToCart = (item) => {
     const isItemInCart = cart.some((cartItem) => cartItem.id === item.id);
   
@@ -77,10 +64,50 @@ function App() {
   
 
 
+
+  const [fav, setfav] = useState([]);
+  const [favlength, setfavlength] = useState(0);
+  
+  useEffect(() => {
+    const storedFav = localStorage.getItem("fav");
+  
+    if (storedFav) {
+      const parsedFav = JSON.parse(storedFav);
+  
+      setfav(parsedFav);
+      setfavlength(parsedFav.length);
+    }
+  }, []);
+  
+
+  const addToFav = (item) => {
+    const isItemInFav = fav.some((favItem) => favItem.id === item.id);
+  
+    if (!isItemInFav) {
+      // Update state
+      const newFav = [...fav, item];
+      setfav(newFav);
+  
+      // Update localStorage
+      localStorage.setItem('fav', JSON.stringify(newFav));
+  
+      // Update fav length state
+      setfavlength(newFav.length);
+  
+      toast.success(`${item.title} added to the fav.`);
+    } else {
+      toast.error(`${item.title} is already in the fav.`);
+    }
+  };
+  
+  
+
+
   
   return (
     <Router>
-      <NavBar CartLength={cartLength}/>
+      <ContextProvider>
+      <NavBar cartLength={cartLength} favlength={favlength} />
 
       <ToastContainer position="top-right" />
       <Cursor />
@@ -88,10 +115,13 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/cart" element={<Cart handleDeleteItem={handleDeleteItem} />} />
+        <Route path="/cart" element={<Cart setCartLength={setCartLength} />} />
         <Route path="/checkout" element={<CheckOut />} />
-        <Route path="/shop" element={<Shop addToCart={addToCart} />} />
+        <Route path="/shop" element={<Shop addToCart={addToCart} addToFav={addToFav} />} />
+        <Route path="/fav" element={<Fav setFavLength={setfavlength} addToCart={addToCart} addToFav={addToFav} />} />
+        <Route path="/product/:id" element={<Details addToCart={addToCart} addToFav={addToFav} />} />
       </Routes>
+      </ContextProvider>
     </Router>
   );
 }
